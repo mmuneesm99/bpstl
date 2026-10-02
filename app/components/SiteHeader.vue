@@ -1,12 +1,9 @@
 <script setup lang="ts">
 const { t } = useLocale()
 const logoSrc = useLogoSrc()
-const { showToast } = useToast()
 const { openAccount } = useModals()
-const route = useRoute()
 
 const menuOpen = ref(false)
-const query = ref('')
 
 const links = computed(() => [
   { id: 'mission', label: t.value.navAbout },
@@ -19,33 +16,6 @@ const links = computed(() => [
 
 function closeMenu() {
   menuOpen.value = false
-}
-
-function handleSearch() {
-  const value = query.value.trim()
-  if (!value) {
-    showToast(t.value.searchEmpty)
-    return
-  }
-  showToast(fill(t.value.searchToast, { query: value }))
-  const normalized = value.toLowerCase()
-  const target = /112|cœur|coeur|arrêt|arret|dae|aed|défib|defib|réagis|reagis/.test(normalized)
-    ? 'survie'
-    : /b[eé]n[eé]vole|volunteer|ehrenamt|candid/.test(normalized)
-      ? 'volunteer'
-      : /organ|devis|calcul|cgdis|manifest/.test(normalized)
-        ? 'guide'
-        : /contact|echternach|adresse|t[eé]l/.test(normalized)
-          ? 'contact'
-          : /service|poste|tente|patrol|formation/.test(normalized)
-            ? 'services'
-            : 'mission'
-  menuOpen.value = false
-  if (route.path !== '/') {
-    navigateTo({ path: '/', hash: `#${target}` })
-    return
-  }
-  document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' })
 }
 </script>
 
@@ -92,19 +62,6 @@ function handleSearch() {
         </button>
       </div>
 
-      <form class="hidden md:block pb-3" @submit.prevent="handleSearch">
-        <div class="relative max-w-md">
-          <input
-            v-model="query"
-            type="search"
-            :placeholder="t.searchPlaceholder"
-            class="w-full bg-white border border-ink/10 rounded-full pl-4 pr-12 py-2.5 text-sm focus:outline-none focus:border-ink/40"
-          >
-          <button type="submit" class="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-ink text-white" aria-label="Search">
-            <i class="fa-solid fa-magnifying-glass text-xs" />
-          </button>
-        </div>
-      </form>
     </div>
 
     <div v-show="menuOpen" class="lg:hidden border-t border-ink/10 bg-paper px-4 py-4 space-y-1">
