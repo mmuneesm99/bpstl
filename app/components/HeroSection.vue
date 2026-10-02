@@ -1,51 +1,54 @@
 <script setup lang="ts">
 const { t } = useLocale()
+
+const hrefs = [
+  'https://benevolat.lu/annuaire-associations/benevolle-premiers-secours-team-luxembourg',
+  'https://www.openstreetmap.org/search?query=8%20Rue%20des%20Romains%206478%20Echternach',
+  'https://112.public.lu/',
+]
 </script>
 
 <template>
-  <section id="hero" class="hero-grid text-ink relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 lg:pt-24 lg:pb-28 relative">
-      <div class="grid lg:grid-cols-12 gap-12 items-end">
-        <div class="lg:col-span-7">
-          <p class="text-xs uppercase tracking-[0.22em] text-pulse font-semibold">{{ t.heroTag }}</p>
-          <h1 class="mt-5 text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold tracking-tight leading-[1.05]">
-            {{ t.heroTitle }}
-          </h1>
-          <p class="mt-6 text-base sm:text-lg text-ink/75 max-w-xl leading-relaxed">
-            {{ t.heroLead }}
-          </p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-3">
-            <NuxtLink to="/#guide" class="inline-flex justify-center items-center bg-pulse hover:bg-medical-600 text-white font-semibold px-6 py-3.5 rounded-full">
-              {{ t.heroCta1 }}
-            </NuxtLink>
-            <NuxtLink to="/#volunteer" class="inline-flex justify-center items-center border border-ink/15 bg-white hover:border-pulse px-6 py-3.5 rounded-full">
-              {{ t.heroCta2 }}
-            </NuxtLink>
-          </div>
-          <ul class="mt-8 flex flex-wrap gap-2">
-            <li v-for="chip in t.chips" :key="chip" class="text-[11px] uppercase tracking-[0.16em] border border-ink/15 bg-white rounded-full px-3 py-1 text-ink/70">
-              {{ chip }}
-            </li>
-          </ul>
-        </div>
-
-        <div class="lg:col-span-5 space-y-4">
-          <blockquote class="border border-ink/10 bg-white rounded-3xl p-6 shadow-sm">
-            <p class="font-serif text-xl leading-snug">{{ t.heroMotto }}</p>
-            <footer class="mt-4 text-xs uppercase tracking-[0.16em] text-ink/45">{{ t.heroMottoAuthor }}</footer>
-          </blockquote>
-          <a href="tel:112" class="flex items-center justify-between gap-4 rounded-3xl bg-white border border-red-100 text-ink px-6 py-5 shadow-sm">
-            <span>
-              <span class="block text-3xl font-semibold tracking-tight text-red-600">{{ t.call112 }}</span>
-              <span class="block text-sm text-ink/60 mt-1">{{ t.call112hint }}</span>
-            </span>
-            <i class="fa-solid fa-phone text-red-600" />
-          </a>
-        </div>
+  <section id="hero">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-14 lg:pt-16 lg:pb-20 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7 rise">
+        <p class="text-sm text-ink/60">{{ t.heroTag }}</p>
+        <h1 class="mt-4 text-4xl sm:text-5xl font-bold leading-tight">
+          {{ t.heroTitle }}
+        </h1>
+        <svg class="mt-4 h-8 w-44 text-pulse" viewBox="0 0 160 36" fill="none" aria-hidden="true">
+          <path class="pulse-draw" d="M2 20 H28 L40 20 L52 6 L66 30 L78 14 L90 20 H158" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
+          {{ t.heroLead }}
+        </p>
+        <p class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <NuxtLink to="/#guide" class="bg-pulse hover:bg-medical-600 text-white font-semibold px-5 py-3">
+            {{ t.heroCta1 }}
+          </NuxtLink>
+          <NuxtLink to="/#volunteer" class="font-semibold text-pulse hover:underline">
+            {{ t.heroCta2 }}
+          </NuxtLink>
+        </p>
       </div>
+      <DoodleArt name="doodle-event" class="lg:col-span-5 w-full max-w-md mx-auto rise rise-3" />
     </div>
-    <svg class="w-full h-16 text-pulse" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 48 H260 L310 48 L350 12 L400 68 L445 28 L490 48 H1200" fill="none" stroke="currentColor" stroke-width="2.5" />
-    </svg>
+
+    <div class="bg-paper border-y border-ink/10">
+      <Reveal class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 md:divide-x divide-ink/10 scroll-list">
+        <a
+          v-for="(item, index) in t.contexts"
+          :key="item.title"
+          :href="hrefs[index]"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block py-5 md:px-8 md:first:pl-0 md:last:pr-0"
+        >
+          <h2 class="font-bold">{{ item.title }}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink/75">{{ item.text }}</p>
+          <p class="mt-1 text-sm font-semibold whitespace-nowrap">{{ item.detail }}</p>
+        </a>
+      </Reveal>
+    </div>
   </section>
 </template>

@@ -10,8 +10,7 @@ useHead({
 </script>
 
 <template>
-  <div class="bg-paper text-ink font-sans antialiased selection:bg-pulse selection:text-white min-h-screen">
-    <SiteTopBar />
+  <div class="bg-white text-ink font-sans antialiased selection:bg-pulse selection:text-white min-h-screen">
     <SiteHeader />
     <NuxtPage />
     <SiteFooter />

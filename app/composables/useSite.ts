@@ -24,7 +24,7 @@ export interface SiteCopy {
   call112hint: string
   chips: string[]
   contextTitle: string
-  contexts: { title: string; text: string }[]
+  contexts: { title: string; text: string; detail: string }[]
   aboutEyebrow: string
   aboutTitle: string
   aboutDesc: string
@@ -41,6 +41,7 @@ export interface SiteCopy {
   servicesEyebrow: string
   servicesTitle: string
   servicesLead: string
+  servicesImageNote: string
   services: { title: string; subtitle: string; filter: string; text: string }[]
   guideEyebrow: string
   guideTitle: string
@@ -150,9 +151,9 @@ const messages: Record<LocaleCode, SiteCopy> = {
     chips: ['Santé', 'Secours', 'Tout public'],
     contextTitle: 'Repères publics',
     contexts: [
-      { title: 'Annuaire national', text: 'L’association est recensée par l’Agence du Bénévolat, catégories Santé, Secours et Tout public.' },
-      { title: 'Siège à Echternach', text: '8, rue des Romains, L-6478 Echternach. Téléphone +352 621 387 104.' },
-      { title: 'Secours publics', text: 'Le 112 est reçu par le Central des secours d’urgence du CGDIS. B.P.S.T.L. n’est pas ce central.' },
+      { title: 'Annuaire national', text: 'Recensée par l’Agence du Bénévolat.', detail: 'Santé · Secours · Tout public' },
+      { title: 'Siège à Echternach', text: '8, rue des Romains, L-6478 Echternach', detail: '+352 621 387 104' },
+      { title: 'Secours publics', text: 'Le 112 est reçu par le central du CGDIS.', detail: 'B.P.S.T.L. n’est pas ce central.' },
     ],
     aboutEyebrow: 'La mission',
     aboutTitle: 'Être là, bénévolement, quand une manifestation a besoin de premiers secours.',
@@ -175,6 +176,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'Sur le terrain',
     servicesTitle: 'Une présence adaptée à la manifestation',
     servicesLead: 'La fiche d’annuaire ne publie pas de catalogue. Elle indique des premiers secours bénévoles sur des manifestations de toute nature. Les points ci-dessous sont des éléments courants d’une présence de secours, à confirmer au +352 621 387 104.',
+    servicesImageNote: 'Illustrations pour situer ce type de présence. Ce ne sont pas des photos de B.P.S.T.L.',
     services: [
       { title: 'Poste de secours', subtitle: 'Point fixe', filter: 'Poste de secours', text: 'Un endroit identifiable où le public trouve une équipe pour un malaise, une plaie ou une première prise en charge.' },
       { title: 'Défibrillateur', subtitle: 'DAE', filter: 'DAE', text: 'Selon la commune de Mertzig, un DAE installé dans un lieu public au Luxembourg peut être utilisé par toute personne. La carte nationale est sur reagis.lu. Qu’un DAE soit apporté par B.P.S.T.L. se confirme par téléphone.' },
@@ -185,10 +187,10 @@ const messages: Record<LocaleCode, SiteCopy> = {
     ],
     guideEyebrow: 'Pour les organisateurs',
     guideTitle: 'Comment demander une présence',
-    guideLead: 'Plus la date est connue tôt, plus l’équipe peut dire si elle est disponible. Le calculateur qui suit aide à préparer la conversation. Ce n’est pas une prescription du CGDIS.',
+    guideLead: 'Plus la date est connue tôt, plus l’équipe peut dire si elle est disponible. La présence se confirme par téléphone. Ce n’est pas une prescription du CGDIS.',
     steps: [
       { title: 'Décrire la manifestation', text: 'Type, commune, horaire, public attendu, et si le site est étendu ou concentré.' },
-      { title: 'Estimer le besoin bénévole', text: 'L’outil plus bas propose un ordre de grandeur de secouristes et de matériel. Il sert de base de discussion.' },
+      { title: 'Préparer l’appel', text: 'Notez le type de manifestation, la commune, l’horaire et le public attendu. L’équipe en discute au téléphone.' },
       { title: 'Déclarer au CGDIS si nécessaire', text: 'Pour un dispositif de secours, le CGDIS demande une déclaration au moins un mois avant la date et peut refuser une demande hors délai. Il fixe le dispositif. Le 112 peut aussi envoyer cette équipe vers une urgence extérieure à la manifestation. Contact : manifestation@cgdis.lu.' },
       { title: 'Appeler B.P.S.T.L.', text: 'La présence bénévole se confirme par téléphone au +352 621 387 104.' },
     ],
@@ -255,7 +257,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     faqTitle: 'Avant d’appeler',
     faqs: [
       { q: 'Pouvez-vous remplacer une ambulance ?', a: 'Non. En urgence vitale, appelez le 112. L’équipe bénévole assure des premiers secours sur une manifestation et passe le relais aux secours publics dès que c’est nécessaire.' },
-      { q: 'Votre calculateur vaut-il un accord du CGDIS ?', a: 'Non. C’est une estimation pour dimensionner une présence bénévole. Le dispositif officiel, lorsqu’il est requis, est décidé par le CGDIS après déclaration de la manifestation.' },
+      { q: 'Une présence bénévole remplace-t-elle la déclaration au CGDIS ?', a: 'Non. Lorsqu’un dispositif officiel est requis, c’est le CGDIS qui le décide après déclaration de la manifestation.' },
       { q: 'Où êtes-vous basés ?', a: 'À Echternach, 8, rue des Romains, L-6478. Le projet publié vise des manifestations de toute nature au Luxembourg, pas uniquement la commune du siège.' },
       { q: 'Faut-il déjà être secouriste pour candidater ?', a: 'Le site de l’association ne fixe pas de diplôme préalable. La candidature se discute directement avec l’équipe, au +352 621 387 104.' },
       { q: 'Comment transmettre une demande ou une candidature ?', a: 'Par téléphone, au +352 621 387 104. Ce site n’enregistre pas de formulaire.' },
@@ -296,7 +298,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { title: 'Éditeur de ces pages', text: 'Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L.), 8, rue des Romains, L-6478 Echternach. Téléphone +352 621 387 104. Fiche d’annuaire : benevolat.lu.' },
       { title: 'Contact', text: 'Les demandes et les candidatures se font par téléphone au +352 621 387 104. Ce site n’enregistre pas de formulaire.' },
       { title: 'Urgences', text: 'Ce site n’est pas un canal d’alerte. En cas d’urgence, appelez le 112.' },
-      { title: 'Calculateur', text: 'Les effectifs proposés sont une estimation indicative de l’association pour préparer un échange. Ils ne constituent pas le dispositif prévisionnel de secours du CGDIS.' },
     ],
   },
   de: {
@@ -324,9 +325,9 @@ const messages: Record<LocaleCode, SiteCopy> = {
     chips: ['Gesundheit', 'Rettung', 'Für alle'],
     contextTitle: 'Öffentliche Anker',
     contexts: [
-      { title: 'Nationales Verzeichnis', text: 'Der Verein steht im Verzeichnis der Agence du Bénévolat, Bereiche Gesundheit, Rettung und für alle.' },
-      { title: 'Sitz in Echternach', text: '8, rue des Romains, L-6478 Echternach. Telefon +352 621 387 104.' },
-      { title: 'Öffentliche Rettung', text: 'Die 112 nimmt die Notrufzentrale des CGDIS entgegen. B.P.S.T.L. ist diese Zentrale nicht.' },
+      { title: 'Nationales Verzeichnis', text: 'Eingetragen bei der Agence du Bénévolat.', detail: 'Gesundheit · Rettung · für alle' },
+      { title: 'Sitz in Echternach', text: '8, rue des Romains, L-6478 Echternach', detail: '+352 621 387 104' },
+      { title: 'Öffentliche Rettung', text: 'Die 112 nimmt die Notrufzentrale des CGDIS entgegen.', detail: 'B.P.S.T.L. ist diese Zentrale nicht.' },
     ],
     aboutEyebrow: 'Der Auftrag',
     aboutTitle: 'Ehrenamtlich da sein, wenn eine Veranstaltung Erste Hilfe braucht.',
@@ -349,6 +350,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'Vor Ort',
     servicesTitle: 'Eine Präsenz, die zur Veranstaltung passt',
     servicesLead: 'Der Verzeichniseintrag nennt keinen Leistungskatalog. Er beschreibt ehrenamtliche Erste Hilfe auf Veranstaltungen aller Art. Die Punkte unten sind übliche Bestandteile einer Sanitätspräsenz und unter +352 621 387 104 zu bestätigen.',
+    servicesImageNote: 'Abbildungen, um diese Art von Präsenz zu zeigen. Keine Fotos von B.P.S.T.L.',
     services: [
       { title: 'Sanitätsposten', subtitle: 'Fester Punkt', filter: 'Sanitätsposten', text: 'Ein erkennbarer Ort, an dem das Publikum bei Unwohlsein, Wunden oder der ersten Versorgung ein Team findet.' },
       { title: 'Defibrillator', subtitle: 'AED', filter: 'AED', text: 'Nach Angaben der Gemeinde Mertzig darf ein öffentlich zugänglicher AED in Luxemburg von jeder Person benutzt werden. Die nationale Karte steht auf reagis.lu. Ob B.P.S.T.L. einen AED mitbringt, ist telefonisch zu klären.' },
@@ -359,10 +361,10 @@ const messages: Record<LocaleCode, SiteCopy> = {
     ],
     guideEyebrow: 'Für Veranstalter',
     guideTitle: 'So fragen Sie eine Präsenz an',
-    guideLead: 'Je früher das Datum feststeht, desto klarer kann das Team sagen, ob es verfügbar ist. Der Rechner bereitet das Gespräch vor. Er ist keine Vorgabe des CGDIS.',
+    guideLead: 'Je früher das Datum feststeht, desto klarer kann das Team sagen, ob es verfügbar ist. Die Präsenz wird telefonisch bestätigt. Das ist keine Vorgabe des CGDIS.',
     steps: [
       { title: 'Die Veranstaltung beschreiben', text: 'Art, Gemeinde, Uhrzeit, erwartetes Publikum und ob das Gelände weitläufig oder kompakt ist.' },
-      { title: 'Den ehrenamtlichen Bedarf schätzen', text: 'Das Werkzeug unten gibt eine Größenordnung für Helfer und Material. Es ist eine Gesprächsgrundlage.' },
+      { title: 'Das Gespräch vorbereiten', text: 'Notieren Sie Art, Gemeinde, Uhrzeit und erwartetes Publikum. Das Team bespricht das am Telefon.' },
       { title: 'Beim CGDIS melden, wenn nötig', text: 'Für einen Sanitätsdienst verlangt der CGDIS die Meldung mindestens einen Monat vorher und kann eine verspätete Anfrage ablehnen. Er legt den Dienst fest. Die 112 kann diese Mannschaft auch zu einem Notfall außerhalb der Veranstaltung schicken. Kontakt: manifestation@cgdis.lu.' },
       { title: 'B.P.S.T.L. anrufen', text: 'Die ehrenamtliche Präsenz wird telefonisch unter +352 621 387 104 bestätigt.' },
     ],
@@ -429,7 +431,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     faqTitle: 'Bevor Sie anrufen',
     faqs: [
       { q: 'Können Sie einen Rettungswagen ersetzen?', a: 'Nein. Im lebensbedrohlichen Notfall wählen Sie die 112. Das ehrenamtliche Team leistet Erste Hilfe auf einer Veranstaltung und übergibt an die öffentlichen Rettungsdienste, sobald das nötig ist.' },
-      { q: 'Gilt der Rechner als Zusage des CGDIS?', a: 'Nein. Er schätzt eine ehrenamtliche Präsenz. Den offiziellen Dienst, wo er erforderlich ist, legt der CGDIS nach der Meldung fest.' },
+      { q: 'Ersetzt eine ehrenamtliche Präsenz die Meldung beim CGDIS?', a: 'Nein. Wo ein offizieller Dienst erforderlich ist, legt ihn der CGDIS nach der Meldung fest.' },
       { q: 'Wo ist der Sitz?', a: 'In Echternach, 8, rue des Romains, L-6478. Das veröffentlichte Projekt gilt für Veranstaltungen aller Art in Luxemburg, nicht nur für die Sitzgemeinde.' },
       { q: 'Muss ich schon Ersthelfer sein?', a: 'Die Vereinsseite nennt keinen vorausgesetzten Abschluss. Die Bewerbung wird direkt mit dem Team besprochen, unter +352 621 387 104.' },
       { q: 'Wie sende ich eine Anfrage oder Bewerbung?', a: 'Telefonisch unter +352 621 387 104. Diese Website speichert kein Formular.' },
@@ -470,7 +472,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { title: 'Herausgeber dieser Seiten', text: 'Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L.), 8, rue des Romains, L-6478 Echternach. Telefon +352 621 387 104. Verzeichniseintrag: benevolat.lu.' },
       { title: 'Kontakt', text: 'Anfragen und Bewerbungen laufen über das Telefon +352 621 387 104. Diese Website speichert kein Formular.' },
       { title: 'Notfälle', text: 'Diese Website ist kein Alarmierungsweg. Im Notfall die 112 anrufen.' },
-      { title: 'Rechner', text: 'Die vorgeschlagenen Stärken sind eine interne Schätzung des Vereins zur Vorbereitung eines Gesprächs. Sie sind nicht der vorausschauende Sanitätsdienst des CGDIS.' },
     ],
   },
   en: {
@@ -498,9 +499,9 @@ const messages: Record<LocaleCode, SiteCopy> = {
     chips: ['Health', 'Rescue', 'Open to all'],
     contextTitle: 'Public reference points',
     contexts: [
-      { title: 'National directory', text: 'The association is listed by the Agence du Bénévolat under Health, Rescue and Open to all.' },
-      { title: 'Seat in Echternach', text: '8, rue des Romains, L-6478 Echternach. Phone +352 621 387 104.' },
-      { title: 'Public rescue', text: '112 is answered by the CGDIS emergency call centre. B.P.S.T.L. is not that centre.' },
+      { title: 'National directory', text: 'Listed by the Agence du Bénévolat.', detail: 'Health · Rescue · Open to all' },
+      { title: 'Seat in Echternach', text: '8, rue des Romains, L-6478 Echternach', detail: '+352 621 387 104' },
+      { title: 'Public rescue', text: '112 is answered by the CGDIS call centre.', detail: 'B.P.S.T.L. is not that centre.' },
     ],
     aboutEyebrow: 'The mission',
     aboutTitle: 'To be there, as volunteers, when an event needs first aid.',
@@ -523,6 +524,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'On the ground',
     servicesTitle: 'Cover shaped to the event',
     servicesLead: 'The directory profile does not publish a service list. It states voluntary first aid at events of all kinds. The items below are usual parts of event cover, to be confirmed on +352 621 387 104.',
+    servicesImageNote: 'Illustrations of this kind of cover. Not photographs of B.P.S.T.L.',
     services: [
       { title: 'First-aid post', subtitle: 'Fixed point', filter: 'First-aid post', text: 'A recognisable place where the public finds a team for illness, wounds or initial care.' },
       { title: 'Defibrillator', subtitle: 'AED', filter: 'AED', text: 'The Commune of Mertzig states that a public AED in Luxembourg may be used by anyone. The national map is on reagis.lu. Whether B.P.S.T.L. brings an AED is confirmed by phone.' },
@@ -533,10 +535,10 @@ const messages: Record<LocaleCode, SiteCopy> = {
     ],
     guideEyebrow: 'For organisers',
     guideTitle: 'How to request cover',
-    guideLead: 'The earlier the date is known, the sooner the team can say whether it is free. The calculator prepares that conversation. It is not a CGDIS prescription.',
+    guideLead: 'The earlier the date is known, the sooner the team can say whether it is free. Cover is confirmed by phone. It is not a CGDIS prescription.',
     steps: [
       { title: 'Describe the event', text: 'Type, commune, hours, expected public, and whether the site is spread out or compact.' },
-      { title: 'Estimate the volunteer need', text: 'The tool below suggests an order of magnitude for responders and kit. It is a basis for discussion.' },
+      { title: 'Prepare the call', text: 'Note the event type, commune, hours and expected public. The team discusses that by phone.' },
       { title: 'Declare to the CGDIS when required', text: 'For emergency cover, the CGDIS asks for a declaration at least one month before the date and may refuse a late request. It sets the device. 112 may also send that crew to an emergency outside the event. Contact: manifestation@cgdis.lu.' },
       { title: 'Call B.P.S.T.L.', text: 'Volunteer cover is confirmed by phone on +352 621 387 104.' },
     ],
@@ -603,7 +605,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
     faqTitle: 'Before you call',
     faqs: [
       { q: 'Can you replace an ambulance?', a: 'No. In a life-threatening emergency, call 112. The volunteer team provides first aid at an event and hands over to the public emergency services as soon as that is needed.' },
-      { q: 'Does the calculator count as CGDIS approval?', a: 'No. It estimates volunteer cover. Where official cover is required, the CGDIS decides it after the event is declared.' },
+      { q: 'Does volunteer cover replace a CGDIS declaration?', a: 'No. Where official cover is required, the CGDIS decides it after the event is declared.' },
       { q: 'Where are you based?', a: 'In Echternach, 8, rue des Romains, L-6478. The published project covers events of all kinds in Luxembourg, not only the commune of the seat.' },
       { q: 'Do I already need to be a first-aider to apply?', a: 'The association’s public profile does not set a prior diploma. Applications are discussed directly with the team on +352 621 387 104.' },
       { q: 'How do I send a request or an application?', a: 'By phone, on +352 621 387 104. This site does not store a form.' },
@@ -644,7 +646,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { title: 'Publisher of these pages', text: 'Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L.), 8, rue des Romains, L-6478 Echternach. Phone +352 621 387 104. Directory profile: benevolat.lu.' },
       { title: 'Contact', text: 'Requests and applications are made by phone on +352 621 387 104. This site does not store a form.' },
       { title: 'Emergencies', text: 'This site is not an alerting channel. In an emergency, call 112.' },
-      { title: 'Calculator', text: 'The staffing figures are an indicative estimate from the association, to prepare a conversation. They are not the CGDIS planned emergency device.' },
     ],
   },
 }
@@ -709,6 +710,14 @@ export function useLogoSrc() {
   return computed(() => {
     const base = config.app.baseURL || '/'
     return `${base.endsWith('/') ? base : `${base}/`}logo.png`
+  })
+}
+
+export function useDoodle(name: string) {
+  const config = useRuntimeConfig()
+  return computed(() => {
+    const base = config.app.baseURL || '/'
+    return `${base.endsWith('/') ? base : `${base}/`}doodles/${name}.png`
   })
 }
 

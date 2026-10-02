@@ -4,11 +4,10 @@ const { message, visible } = useToast()
 
 <template>
   <div
-    class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl z-50 transition-all duration-300 flex items-center space-x-3 border border-slate-700 pointer-events-none"
-    :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'"
+    class="fixed bottom-4 right-4 bg-ink text-white px-4 py-3 z-50 transition-all duration-300 pointer-events-none max-w-sm text-sm"
+    :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
     role="status"
   >
-    <i class="fa-solid fa-circle-check text-emerald-400 text-lg" />
-    <span class="text-xs font-bold">{{ message }}</span>
+    {{ message }}
   </div>
 </template>

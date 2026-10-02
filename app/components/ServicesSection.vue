@@ -1,45 +1,62 @@
 <script setup lang="ts">
 const { t } = useLocale()
-const { showToast } = useToast()
+const config = useRuntimeConfig()
 
-const icons = [
-  'fa-solid fa-house-medical',
-  'fa-solid fa-heart-pulse',
-  'fa-solid fa-tent',
-  'fa-solid fa-kit-medical',
-  'fa-solid fa-person-walking',
-  'fa-solid fa-arrows-rotate',
-]
+const active = ref(0)
 
-function selectCategory(label: string) {
-  document.getElementById('guide')?.scrollIntoView({ behavior: 'smooth' })
-  showToast(fill(t.value.categoryToast, { cat: label }))
-}
+const serviceImages = [
+  'services/service-post.jpg',
+  'services/service-aed.jpg',
+  'services/service-tent.jpg',
+  'services/service-bag.jpg',
+  'services/service-patrol.jpg',
+  'services/service-training.jpg',
+].map((file) => {
+  const base = config.app.baseURL || '/'
+  return `${base.endsWith('/') ? base : `${base}/`}${file}`
+})
+
+const current = computed(() => t.value.services[active.value] ?? t.value.services[0])
+
+watch(() => t.value.services.length, () => {
+  if (active.value >= t.value.services.length) active.value = 0
+})
 </script>
 
 <template>
-  <section id="services" class="py-20 bg-white border-y border-ink/10">
+  <section id="services" class="py-16 bg-white border-t border-ink/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="max-w-2xl">
-        <p class="text-[11px] uppercase tracking-[0.2em] text-pulse font-semibold">{{ t.servicesEyebrow }}</p>
-        <h2 class="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">{{ t.servicesTitle }}</h2>
-        <p class="mt-4 text-ink/70 leading-relaxed">{{ t.servicesLead }}</p>
+        <h2 class="text-3xl font-bold">{{ t.servicesTitle }}</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink/80">{{ t.servicesLead }}</p>
       </div>
 
-      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <button
-          v-for="(service, index) in t.services"
-          :key="service.title"
-          type="button"
-          class="text-left rounded-3xl border border-ink/10 p-6 hover:border-pulse/40 hover:bg-paper transition group"
-          @click="selectCategory(service.filter)"
-        >
-          <i :class="icons[index]" class="text-pulse" />
-          <h3 class="mt-5 font-semibold text-lg">{{ service.title }}</h3>
-          <p class="text-xs uppercase tracking-[0.14em] text-ink/40 mt-1">{{ service.subtitle }}</p>
-          <p class="mt-3 text-sm text-ink/70 leading-relaxed">{{ service.text }}</p>
-        </button>
-      </div>
+      <Reveal class="mt-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <ol class="scroll-list lg:col-span-4 border-t border-ink/15">
+          <li v-for="(service, index) in t.services" :key="service.title" class="border-b border-ink/15">
+            <button
+              type="button"
+              class="flex w-full items-baseline gap-3 py-3 text-left"
+              :class="active === index ? 'text-pulse font-bold' : 'hover:text-pulse'"
+              :aria-current="active === index ? 'true' : undefined"
+              @click="active = index"
+            >
+              <span class="w-6 shrink-0 text-sm text-ink/40">{{ index + 1 }}</span>
+              <span>{{ service.title }}</span>
+            </button>
+          </li>
+        </ol>
+
+        <div class="scroll-from-right lg:col-span-8">
+          <div :key="active" class="service-swap">
+            <img :src="serviceImages[active]" alt="" class="w-full h-72 sm:h-96 object-cover bg-paper">
+            <h3 class="mt-4 text-2xl font-bold">{{ current.title }}</h3>
+            <p class="mt-2 max-w-xl text-base leading-relaxed text-ink/80">{{ current.text }}</p>
+          </div>
+        </div>
+      </Reveal>
+
+      <p class="mt-8 text-sm text-ink/50">{{ t.servicesImageNote }}</p>
     </div>
   </section>
 </template>

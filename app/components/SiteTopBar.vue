@@ -37,42 +37,41 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="relative z-50 bg-ink text-white text-xs">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <p class="text-white/80">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-red-500 mr-2 align-middle badge-pulse" />
+  <div class="relative z-50 bg-paper text-ink text-sm border-b border-ink/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <p>
+        <a href="tel:112" class="inline-block bg-pulse text-white font-bold px-2 py-0.5 mr-2">112</a>
         {{ t.topAnnounce }}
       </p>
       <div class="flex items-center gap-4 shrink-0">
-        <a href="tel:112" class="font-semibold tracking-wide text-white hover:text-red-300">112</a>
-        <a href="tel:+352621387104" class="text-white/80 hover:text-white">+352 621 387 104</a>
-        <div ref="root" class="relative border-l border-white/15 pl-4">
+        <a href="tel:+352621387104" class="hover:underline">+352 621 387 104</a>
+        <div ref="root" class="relative border-l border-ink/15 pl-4">
           <button
             type="button"
-            class="flex items-center gap-1.5 font-semibold text-white"
+            class="flex items-center gap-1.5 font-semibold"
             :aria-expanded="open"
             aria-haspopup="listbox"
             @click.stop="open = !open"
           >
             {{ locale.toUpperCase() }}
-            <i class="fa-solid fa-chevron-down text-[9px] text-white/70 transition" :class="open ? 'rotate-180' : ''" />
+            <i class="fa-solid fa-chevron-down text-[9px] transition" :class="open ? 'rotate-180' : ''" />
           </button>
           <ul
             v-show="open"
-            class="absolute right-0 top-full z-50 mt-2 w-36 overflow-hidden rounded-xl border border-black/10 bg-white py-1 text-ink shadow-lg"
+            class="absolute right-0 top-full z-50 mt-2 w-40 border border-ink/15 bg-white py-1 text-ink shadow-sm"
             role="listbox"
           >
             <li v-for="language in languages" :key="language.code">
               <button
                 type="button"
-                class="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-semibold hover:bg-[#f3f8fb]"
-                :class="locale === language.code ? 'text-[#0f8f8a]' : 'text-[#0c4a6e]'"
+                class="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-paper"
+                :class="locale === language.code ? 'font-bold text-pulse' : ''"
                 role="option"
                 :aria-selected="locale === language.code"
                 @click="choose(language.code)"
               >
                 <span>{{ language.name }}</span>
-                <span class="text-[10px] tracking-wide" :class="locale === language.code ? 'text-[#0f8f8a]' : 'text-black/40'">{{ language.label }}</span>
+                <span class="text-xs text-ink/50">{{ language.label }}</span>
               </button>
             </li>
           </ul>
@@ -81,13 +80,3 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.badge-pulse {
-  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-@keyframes pulse-ring {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-</style>

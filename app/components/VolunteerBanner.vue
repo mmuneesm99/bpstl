@@ -3,24 +3,25 @@ const { t } = useLocale()
 </script>
 
 <template>
-  <section id="volunteer" class="py-20">
+  <section id="volunteer" class="py-16">
+    <Reveal>
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="rounded-[2rem] overflow-hidden grid lg:grid-cols-12 bg-ink text-white">
-        <div class="lg:col-span-7 p-8 sm:p-12">
-          <p class="text-[11px] uppercase tracking-[0.2em] text-teal-200 font-semibold">{{ t.volunteerBadge }}</p>
-          <h2 class="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">{{ t.volunteerTitle }}</h2>
-          <p class="mt-4 text-white/70 leading-relaxed max-w-xl">{{ t.volunteerText }}</p>
-          <a href="tel:+352621387104" class="mt-8 inline-flex bg-white text-ink font-semibold px-6 py-3.5 rounded-full hover:bg-paper">
-            {{ t.volunteerCta }}
-          </a>
-        </div>
-        <ul class="lg:col-span-5 bg-pulse p-8 sm:p-12 space-y-5 text-sm leading-relaxed">
-          <li v-for="point in t.volunteerPoints" :key="point" class="flex gap-3">
-            <span class="mt-1 w-1.5 h-1.5 rounded-full bg-white shrink-0" />
-            <span>{{ point }}</span>
-          </li>
+    <div class="grid lg:grid-cols-12 gap-10 items-center bg-paper px-6 py-10 sm:px-10">
+      <div class="lg:col-span-7">
+        <h2 class="text-3xl font-bold leading-tight">{{ t.volunteerTitle }}</h2>
+        <p class="mt-4 text-lg leading-relaxed max-w-xl">{{ t.volunteerText }}</p>
+        <a href="tel:+352621387104" class="inline-block mt-8 bg-pulse hover:bg-medical-600 text-white font-semibold px-5 py-3">
+          {{ t.volunteerCta }}
+        </a>
+      </div>
+      <div class="lg:col-span-5">
+        <DoodleArt name="doodle-help" late class="w-52 mb-6" />
+        <ul class="space-y-4 text-sm leading-relaxed border-t lg:border-t-0 lg:border-l border-ink/15 lg:pl-8 pt-6 lg:pt-1">
+          <li v-for="point in t.volunteerPoints" :key="point">{{ point }}</li>
         </ul>
       </div>
     </div>
+    </div>
+    </Reveal>
   </section>
 </template>

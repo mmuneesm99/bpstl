@@ -12,11 +12,9 @@ useSeoMeta({
 <template>
   <main>
     <HeroSection />
-    <PartnersStrip />
-    <AboutSection />
     <ServicesSection />
+    <AboutSection />
     <GuideSection />
-    <CalculatorSection />
     <SurvivalSection />
     <VolunteerBanner />
     <FaqSection />

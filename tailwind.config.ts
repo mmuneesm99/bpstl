@@ -8,9 +8,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        paper: '#f3f8fb',
-        ink: '#0c4a6e',
-        pulse: '#0f8f8a',
+        paper: '#f4f5f6',
+        ink: '#1a1d21',
+        pulse: '#d0121a',
         medical: {
           50: '#f0fdfa',
           100: '#ccfbf1',
@@ -27,8 +27,8 @@ export default {
         redalert: '#ef4444',
       },
       fontFamily: {
-        sans: ['Outfit', 'sans-serif'],
-        serif: ['Fraunces', 'serif'],
+        sans: ['Figtree', '"Segoe UI"', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'Figtree', 'sans-serif'],
       },
     },
   },
