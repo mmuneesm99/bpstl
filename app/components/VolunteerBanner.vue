@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useLocale()
-const { openVolunteer } = useModals()
 </script>
 
 <template>
@@ -11,9 +10,9 @@ const { openVolunteer } = useModals()
           <p class="text-[11px] uppercase tracking-[0.2em] text-red-300 font-semibold">{{ t.volunteerBadge }}</p>
           <h2 class="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">{{ t.volunteerTitle }}</h2>
           <p class="mt-4 text-white/70 leading-relaxed max-w-xl">{{ t.volunteerText }}</p>
-          <button type="button" class="mt-8 bg-white text-ink font-semibold px-6 py-3.5 rounded-full hover:bg-paper" @click="openVolunteer">
+          <a href="tel:+352621387104" class="mt-8 inline-flex bg-white text-ink font-semibold px-6 py-3.5 rounded-full hover:bg-paper">
             {{ t.volunteerCta }}
-          </button>
+          </a>
         </div>
         <ul class="lg:col-span-5 bg-pulse p-8 sm:p-12 space-y-5 text-sm leading-relaxed">
           <li v-for="point in t.volunteerPoints" :key="point" class="flex gap-3">

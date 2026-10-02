@@ -15,8 +15,6 @@ useHead({
     <SiteHeader />
     <NuxtPage />
     <SiteFooter />
-    <VolunteerModal />
-    <AccountModal />
     <AppToast />
   </div>
 </template>

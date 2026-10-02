@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { t } = useLocale()
 const logoSrc = useLogoSrc()
-const { openAccount } = useModals()
 
 const menuOpen = ref(false)
 
@@ -43,9 +42,7 @@ function closeMenu() {
         </nav>
 
         <div class="hidden md:flex items-center gap-2">
-          <button type="button" class="text-sm px-3 py-2 text-ink/70 hover:text-ink" @click="openAccount">
-            {{ t.navAccount }}
-          </button>
+          <a href="tel:+352621387104" class="text-sm px-3 py-2 text-ink/70 hover:text-ink">+352 621 387 104</a>
           <NuxtLink to="/#guide" class="text-sm font-semibold bg-pulse text-white px-4 py-2.5 rounded-full hover:bg-medical-600 transition">
             {{ t.navDemand }}
           </NuxtLink>

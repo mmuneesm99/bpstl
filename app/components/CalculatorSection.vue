@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { t } = useLocale()
-const { showToast } = useToast()
 
 const eventType = ref('sports')
 const visitors = ref(600)
@@ -36,9 +35,6 @@ const recommendation = computed(() => {
   }
 })
 
-function submitQuote() {
-  showToast(t.value.quoteToast)
-}
 </script>
 
 <template>
@@ -111,9 +107,9 @@ function submitQuote() {
                 </div>
               </dl>
             </div>
-            <button type="button" class="mt-6 w-full bg-pulse hover:bg-medical-600 text-white font-semibold py-3.5 rounded-full" @click="submitQuote">
+            <a href="tel:+352621387104" class="mt-6 w-full bg-pulse hover:bg-medical-600 text-white font-semibold py-3.5 rounded-full text-center">
               {{ t.calcSubmit }}
-            </button>
+            </a>
           </div>
         </div>
         <p class="mt-6 text-xs text-white/50 leading-relaxed max-w-3xl">{{ t.calcDisclaimer }}</p>
