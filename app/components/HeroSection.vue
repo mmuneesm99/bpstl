@@ -35,14 +35,14 @@ const hrefs = [
     </div>
 
     <div class="bg-paper border-y border-ink/10">
-      <Reveal class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 md:divide-x divide-ink/10 scroll-list">
+      <Reveal each class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 md:divide-x divide-ink/10">
         <a
           v-for="(item, index) in t.contexts"
           :key="item.title"
           :href="hrefs[index]"
           target="_blank"
           rel="noopener noreferrer"
-          class="block py-5 md:px-8 md:first:pl-0 md:last:pr-0"
+          class="scroll-item block py-5 md:px-8 md:first:pl-0 md:last:pr-0"
         >
           <h2 class="font-bold">{{ item.title }}</h2>
           <p class="mt-2 text-sm leading-relaxed text-ink/75">{{ item.text }}</p>

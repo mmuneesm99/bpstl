@@ -12,16 +12,16 @@ const { t } = useLocale()
         </div>
         <DoodleArt name="doodle-aed" class="hidden sm:block w-40 shrink-0" />
       </div>
-      <Reveal>
-      <ul class="scroll-list mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <li v-for="stat in t.stats" :key="stat.figure">
+      <Reveal each>
+      <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <li v-for="stat in t.stats" :key="stat.figure" class="scroll-item">
           <p class="text-3xl font-bold">{{ stat.figure }}</p>
           <p class="mt-2 text-sm leading-relaxed">{{ stat.text }}</p>
           <p class="mt-2 text-sm text-ink/50">{{ stat.source }}</p>
         </li>
       </ul>
-      <ul class="scroll-list mt-12 grid md:grid-cols-2 gap-x-16">
-        <li v-for="item in t.chain" :key="item.title" class="border-t border-ink/15 py-5">
+      <ul class="mt-12 grid md:grid-cols-2 gap-x-16">
+        <li v-for="item in t.chain" :key="item.title" class="scroll-item border-t border-ink/15 py-5">
           <h3 class="font-bold">{{ item.title }}</h3>
           <p class="mt-2 text-sm leading-relaxed text-ink/75">{{ item.text }}</p>
         </li>
