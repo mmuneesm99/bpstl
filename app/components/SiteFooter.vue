@@ -49,7 +49,7 @@ const links = computed(() => [
           <h2 class="text-[11px] uppercase tracking-[0.18em] text-white/60">{{ t.footerContactTitle }}</h2>
           <ul class="mt-4 space-y-3 text-sm">
             <li>8, rue des Romains<br>L-6478 Echternach</li>
-            <li><a href="tel:+352621387104" class="text-white font-semibold hover:text-red-300">+352 621 387 104</a></li>
+            <li><a href="tel:+352621387104" class="text-white font-semibold hover:text-teal-200">+352 621 387 104</a></li>
             <li><a href="tel:112" class="hover:text-white">{{ t.footerTagline }}</a></li>
           </ul>
         </div>

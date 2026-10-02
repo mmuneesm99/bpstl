@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
   <div class="relative z-50 bg-ink text-white text-xs">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <p class="text-white/80">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-pulse mr-2 align-middle badge-pulse" />
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-red-500 mr-2 align-middle badge-pulse" />
         {{ t.topAnnounce }}
       </p>
       <div class="flex items-center gap-4 shrink-0">
@@ -65,14 +65,14 @@ onBeforeUnmount(() => {
             <li v-for="language in languages" :key="language.code">
               <button
                 type="button"
-                class="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-semibold hover:bg-[#f4f1eb]"
-                :class="locale === language.code ? 'text-[#e10600]' : 'text-[#121316]'"
+                class="flex w-full items-center justify-between px-3 py-2 text-left text-xs font-semibold hover:bg-[#f3f8fb]"
+                :class="locale === language.code ? 'text-[#0f8f8a]' : 'text-[#0c4a6e]'"
                 role="option"
                 :aria-selected="locale === language.code"
                 @click="choose(language.code)"
               >
                 <span>{{ language.name }}</span>
-                <span class="text-[10px] tracking-wide" :class="locale === language.code ? 'text-[#e10600]' : 'text-black/40'">{{ language.label }}</span>
+                <span class="text-[10px] tracking-wide" :class="locale === language.code ? 'text-[#0f8f8a]' : 'text-black/40'">{{ language.label }}</span>
               </button>
             </li>
           </ul>

@@ -7,23 +7,23 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f1eb;
+  background: #f3f8fb;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c8c2b8;
+  background: #b7cdd8;
   border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8d877e;
+  background: #7ea3b5;
 }
 
 .hero-grid {
-  background-color: #09090b;
+  background-color: #f3f8fb;
   background-image:
-    radial-gradient(ellipse 70% 50% at 85% 0%, rgba(225, 6, 0, 0.28), transparent 55%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%);
+    radial-gradient(ellipse 55% 45% at 100% 0%, rgba(15, 143, 138, 0.18), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 100%, rgba(14, 116, 178, 0.12), transparent 55%);
 }
 
 .ecg {
@@ -40,34 +40,35 @@ details.faq > summary::-webkit-details-marker {
 
 /* Theme colors are also declared here so dark surfaces stay solid
    even when Tailwind has not emitted the custom utilities. */
-.bg-ink { background-color: #121316; }
-.bg-paper { background-color: #f4f1eb; }
-.bg-pulse { background-color: #e10600; }
-.text-ink { color: #121316; }
-.text-pulse { color: #e10600; }
-.border-ink { border-color: #121316; }
-.bg-ink\/10 { background-color: rgb(18 19 22 / 0.1); }
-.bg-paper\/90 { background-color: rgb(244 241 235 / 0.9); }
-.text-ink\/40 { color: rgb(18 19 22 / 0.4); }
-.text-ink\/45 { color: rgb(18 19 22 / 0.45); }
-.text-ink\/50 { color: rgb(18 19 22 / 0.5); }
-.text-ink\/60 { color: rgb(18 19 22 / 0.6); }
-.text-ink\/65 { color: rgb(18 19 22 / 0.65); }
-.text-ink\/70 { color: rgb(18 19 22 / 0.7); }
-.text-ink\/75 { color: rgb(18 19 22 / 0.75); }
-.text-ink\/80 { color: rgb(18 19 22 / 0.8); }
-.border-ink\/5 { border-color: rgb(18 19 22 / 0.05); }
-.border-ink\/10 { border-color: rgb(18 19 22 / 0.1); }
-.border-ink\/40 { border-color: rgb(18 19 22 / 0.4); }
-.divide-ink\/10 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(18 19 22 / 0.1); }
-.ring-ink\/10 { --tw-ring-color: rgb(18 19 22 / 0.1); }
-.decoration-ink\/20 { text-decoration-color: rgb(18 19 22 / 0.2); }
-.hover\:text-ink:hover { color: #121316; }
-.hover\:text-pulse:hover { color: #e10600; }
-.hover\:bg-pulse:hover { background-color: #e10600; }
-.hover\:bg-paper:hover { background-color: #f4f1eb; }
-.hover\:border-pulse:hover { border-color: #e10600; }
-.hover\:border-pulse\/40:hover { border-color: rgb(225 6 0 / 0.4); }
-.hover\:decoration-pulse:hover { text-decoration-color: #e10600; }
+.bg-ink { background-color: #0c4a6e; }
+.bg-paper { background-color: #f3f8fb; }
+.bg-pulse { background-color: #0f8f8a; }
+.text-ink { color: #0c4a6e; }
+.text-pulse { color: #0f8f8a; }
+.border-ink { border-color: #0c4a6e; }
+.bg-ink\/10 { background-color: rgb(12 74 110 / 0.1); }
+.bg-paper\/90 { background-color: rgb(243 248 251 / 0.9); }
+.text-ink\/40 { color: rgb(12 74 110 / 0.4); }
+.text-ink\/45 { color: rgb(12 74 110 / 0.45); }
+.text-ink\/50 { color: rgb(12 74 110 / 0.5); }
+.text-ink\/60 { color: rgb(12 74 110 / 0.6); }
+.text-ink\/65 { color: rgb(12 74 110 / 0.65); }
+.text-ink\/70 { color: rgb(12 74 110 / 0.7); }
+.text-ink\/75 { color: rgb(12 74 110 / 0.75); }
+.text-ink\/80 { color: rgb(12 74 110 / 0.8); }
+.border-ink\/5 { border-color: rgb(12 74 110 / 0.05); }
+.border-ink\/10 { border-color: rgb(12 74 110 / 0.1); }
+.border-ink\/40 { border-color: rgb(12 74 110 / 0.4); }
+.divide-ink\/10 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(12 74 110 / 0.1); }
+.ring-ink\/10 { --tw-ring-color: rgb(12 74 110 / 0.1); }
+.decoration-ink\/20 { text-decoration-color: rgb(12 74 110 / 0.2); }
+.hover\:text-ink:hover { color: #0c4a6e; }
+.hover\:text-pulse:hover { color: #0c746f; }
+.hover\:bg-pulse:hover { background-color: #0c746f; }
+.hover\:bg-paper:hover { background-color: #f3f8fb; }
+.hover\:border-pulse:hover { border-color: #0f8f8a; }
+.hover\:border-pulse\/40:hover { border-color: rgb(15 143 138 / 0.4); }
+.hover\:decoration-pulse:hover { text-decoration-color: #0f8f8a; }
+.hover\:bg-medical-600:hover { background-color: #0c746f; }
 .selection\:bg-pulse *::selection,
-.selection\:bg-pulse::selection { background-color: #e10600; }
+.selection\:bg-pulse::selection { background-color: #0f8f8a; color: #fff; }
