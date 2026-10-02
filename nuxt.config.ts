@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L. a.s.b.l.) — présence médicale et premier secours sur vos événements au Luxembourg.',
+            'Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L.) — premiers secours bénévoles sur des manifestations au Luxembourg. Contact : +352 621 387 104. Urgence vitale : 112.',
         },
       ],
       link: [
