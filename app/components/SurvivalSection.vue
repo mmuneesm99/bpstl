@@ -1,11 +1,12 @@
 <script setup lang="ts">
+defineProps<{ plain?: boolean }>()
 const { t } = useLocale()
 </script>
 
 <template>
   <section id="survie" class="py-16">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex items-end justify-between gap-8">
+      <div v-if="!plain" class="flex items-end justify-between gap-8">
         <div class="max-w-2xl">
           <h2 class="text-3xl font-bold">{{ t.survivalTitle }}</h2>
           <p class="mt-4 leading-relaxed text-ink/80">{{ t.survivalLead }}</p>

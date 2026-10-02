@@ -4,11 +4,12 @@ const logoSrc = useLogoSrc()
 const sources = useSources()
 
 const links = computed(() => [
-  { id: 'mission', label: t.value.navAbout },
-  { id: 'services', label: t.value.footerServices },
-  { id: 'guide', label: t.value.navDevis },
-  { id: 'survie', label: t.value.navSurvival },
-  { id: 'volunteer', label: t.value.navJoin },
+  { to: '/mission', label: t.value.navAbout },
+  { to: '/services', label: t.value.footerServices },
+  { to: '/organiser', label: t.value.navDevis },
+  { to: '/gestes', label: t.value.navSurvival },
+  { to: '/benevoles', label: t.value.navJoin },
+  { to: '/contact', label: t.value.navContact },
 ])
 </script>
 
@@ -27,8 +28,8 @@ const links = computed(() => [
         <div>
           <h2 class="font-bold">{{ t.footerNavTitle }}</h2>
           <ul class="mt-3 space-y-2 text-sm">
-            <li v-for="link in links" :key="link.id">
-              <NuxtLink :to="`/#${link.id}`" class="hover:text-pulse hover:underline">{{ link.label }}</NuxtLink>
+            <li v-for="link in links" :key="link.to">
+              <NuxtLink :to="link.to" class="hover:text-pulse hover:underline">{{ link.label }}</NuxtLink>
             </li>
           </ul>
         </div>

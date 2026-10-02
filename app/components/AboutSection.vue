@@ -20,6 +20,12 @@ const { t } = useLocale()
           </p>
         </div>
       </div>
+      <ul class="max-w-6xl mx-auto px-4 sm:px-6 mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <li v-for="pillar in t.pillars" :key="pillar.title" class="border-t-2 border-pulse pt-4">
+          <h3 class="font-bold">{{ pillar.title }}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink/75">{{ pillar.text }}</p>
+        </li>
+      </ul>
     </Reveal>
   </section>
 </template>

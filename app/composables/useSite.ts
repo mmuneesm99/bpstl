@@ -41,7 +41,6 @@ export interface SiteCopy {
   servicesEyebrow: string
   servicesTitle: string
   servicesLead: string
-  servicesImageNote: string
   services: { title: string; subtitle: string; filter: string; text: string }[]
   guideEyebrow: string
   guideTitle: string
@@ -176,7 +175,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'Sur le terrain',
     servicesTitle: 'Une présence adaptée à la manifestation',
     servicesLead: 'La fiche d’annuaire ne publie pas de catalogue. Elle indique des premiers secours bénévoles sur des manifestations de toute nature. Les points ci-dessous sont des éléments courants d’une présence de secours, à confirmer au +352 621 387 104.',
-    servicesImageNote: 'Illustrations pour situer ce type de présence. Ce ne sont pas des photos de B.P.S.T.L.',
     services: [
       { title: 'Poste de secours', subtitle: 'Point fixe', filter: 'Poste de secours', text: 'Un endroit identifiable où le public trouve une équipe pour un malaise, une plaie ou une première prise en charge.' },
       { title: 'Défibrillateur', subtitle: 'DAE', filter: 'DAE', text: 'Selon la commune de Mertzig, un DAE installé dans un lieu public au Luxembourg peut être utilisé par toute personne. La carte nationale est sur reagis.lu. Qu’un DAE soit apporté par B.P.S.T.L. se confirme par téléphone.' },
@@ -263,7 +261,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { q: 'Comment transmettre une demande ou une candidature ?', a: 'Par téléphone, au +352 621 387 104. Ce site n’enregistre pas de formulaire.' },
     ],
     footerBlurb: 'Bénévoles Premiers Secours Team Luxembourg — association recensée dans l’annuaire de l’Agence du Bénévolat, siège à Echternach.',
-    footerNavTitle: 'Sur cette page',
+    footerNavTitle: 'Pages',
     footerServices: 'Services',
     footerLegalTitle: 'Cadre',
     legalStatus: 'Fiche : Benevolle Premiers Secours Team Luxembourg (B.P.S.T.L)',
@@ -350,7 +348,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'Vor Ort',
     servicesTitle: 'Eine Präsenz, die zur Veranstaltung passt',
     servicesLead: 'Der Verzeichniseintrag nennt keinen Leistungskatalog. Er beschreibt ehrenamtliche Erste Hilfe auf Veranstaltungen aller Art. Die Punkte unten sind übliche Bestandteile einer Sanitätspräsenz und unter +352 621 387 104 zu bestätigen.',
-    servicesImageNote: 'Abbildungen, um diese Art von Präsenz zu zeigen. Keine Fotos von B.P.S.T.L.',
     services: [
       { title: 'Sanitätsposten', subtitle: 'Fester Punkt', filter: 'Sanitätsposten', text: 'Ein erkennbarer Ort, an dem das Publikum bei Unwohlsein, Wunden oder der ersten Versorgung ein Team findet.' },
       { title: 'Defibrillator', subtitle: 'AED', filter: 'AED', text: 'Nach Angaben der Gemeinde Mertzig darf ein öffentlich zugänglicher AED in Luxemburg von jeder Person benutzt werden. Die nationale Karte steht auf reagis.lu. Ob B.P.S.T.L. einen AED mitbringt, ist telefonisch zu klären.' },
@@ -437,7 +434,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { q: 'Wie sende ich eine Anfrage oder Bewerbung?', a: 'Telefonisch unter +352 621 387 104. Diese Website speichert kein Formular.' },
     ],
     footerBlurb: 'Bénévoles Premiers Secours Team Luxembourg — Verein im Verzeichnis der Agence du Bénévolat, Sitz in Echternach.',
-    footerNavTitle: 'Auf dieser Seite',
+    footerNavTitle: 'Seiten',
     footerServices: 'Leistungen',
     footerLegalTitle: 'Rahmen',
     legalStatus: 'Eintrag: Benevolle Premiers Secours Team Luxembourg (B.P.S.T.L)',
@@ -524,7 +521,6 @@ const messages: Record<LocaleCode, SiteCopy> = {
     servicesEyebrow: 'On the ground',
     servicesTitle: 'Cover shaped to the event',
     servicesLead: 'The directory profile does not publish a service list. It states voluntary first aid at events of all kinds. The items below are usual parts of event cover, to be confirmed on +352 621 387 104.',
-    servicesImageNote: 'Illustrations of this kind of cover. Not photographs of B.P.S.T.L.',
     services: [
       { title: 'First-aid post', subtitle: 'Fixed point', filter: 'First-aid post', text: 'A recognisable place where the public finds a team for illness, wounds or initial care.' },
       { title: 'Defibrillator', subtitle: 'AED', filter: 'AED', text: 'The Commune of Mertzig states that a public AED in Luxembourg may be used by anyone. The national map is on reagis.lu. Whether B.P.S.T.L. brings an AED is confirmed by phone.' },
@@ -611,7 +607,7 @@ const messages: Record<LocaleCode, SiteCopy> = {
       { q: 'How do I send a request or an application?', a: 'By phone, on +352 621 387 104. This site does not store a form.' },
     ],
     footerBlurb: 'Bénévoles Premiers Secours Team Luxembourg — association listed in the Agence du Bénévolat directory, seated in Echternach.',
-    footerNavTitle: 'On this page',
+    footerNavTitle: 'Pages',
     footerServices: 'Services',
     footerLegalTitle: 'Framework',
     legalStatus: 'Profile: Benevolle Premiers Secours Team Luxembourg (B.P.S.T.L)',
@@ -719,6 +715,12 @@ export function useDoodle(name: string) {
     const base = config.app.baseURL || '/'
     return `${base.endsWith('/') ? base : `${base}/`}doodles/${name}.png`
   })
+}
+
+export function useAsset(path: string) {
+  const config = useRuntimeConfig()
+  const base = config.app.baseURL || '/'
+  return `${base.endsWith('/') ? base : `${base}/`}${path.replace(/^\//, '')}`
 }
 
 export function useSources() {

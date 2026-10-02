@@ -138,6 +138,15 @@ input[type="checkbox"] {
   transform: none;
 }
 
+.scroll-item .scroll-photo {
+  transform: scale(1.08);
+  transition: transform 0.9s ease;
+}
+
+.scroll-item.is-in .scroll-photo {
+  transform: none;
+}
+
 .timeline {
   position: relative;
 }
@@ -191,7 +200,8 @@ input[type="checkbox"] {
   }
 
   .reveal,
-  .scroll-item {
+  .scroll-item,
+  .scroll-item .scroll-photo {
     opacity: 1;
     transform: none;
     transition: none;

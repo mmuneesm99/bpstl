@@ -13,13 +13,15 @@ const languages = [
   { code: 'en' as const, label: 'EN', name: 'English' },
 ]
 
+const route = useRoute()
+
 const links = computed(() => [
-  { id: 'mission', label: t.value.navAbout },
-  { id: 'services', label: t.value.navServices },
-  { id: 'guide', label: t.value.navDevis },
-  { id: 'survie', label: t.value.navSurvival },
-  { id: 'volunteer', label: t.value.navJoin },
-  { id: 'contact', label: t.value.navContact },
+  { to: '/mission', label: t.value.navAbout },
+  { to: '/services', label: t.value.navServices },
+  { to: '/organiser', label: t.value.navDevis },
+  { to: '/gestes', label: t.value.navSurvival },
+  { to: '/benevoles', label: t.value.navJoin },
+  { to: '/contact', label: t.value.navContact },
 ])
 
 function closeMenu() {
@@ -55,7 +57,7 @@ onBeforeUnmount(() => {
   <header class="sticky top-0 z-40 bg-white border-b border-ink/10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-center justify-between h-16 gap-4">
-        <NuxtLink to="/#hero" class="flex items-center gap-2.5 shrink-0" @click="closeMenu">
+        <NuxtLink to="/" class="flex items-center gap-2.5 shrink-0" @click="closeMenu">
           <img :src="logoSrc" alt="" class="w-9 h-9 object-contain">
           <span class="font-bold leading-none">B.P.S.T.L.</span>
         </NuxtLink>
@@ -63,9 +65,10 @@ onBeforeUnmount(() => {
         <nav class="hidden lg:flex items-center gap-4 text-sm whitespace-nowrap">
           <NuxtLink
             v-for="link in links"
-            :key="link.id"
-            :to="`/#${link.id}`"
+            :key="link.to"
+            :to="link.to"
             class="hover:text-pulse"
+            :class="route.path === link.to ? 'text-pulse font-semibold' : ''"
           >
             {{ link.label }}
           </NuxtLink>
@@ -104,7 +107,7 @@ onBeforeUnmount(() => {
               </li>
             </ul>
           </div>
-          <NuxtLink to="/#guide" class="hidden md:inline-block text-sm font-semibold bg-pulse text-white px-3 py-2 hover:bg-medical-600 whitespace-nowrap">
+          <NuxtLink to="/organiser" class="hidden md:inline-block text-sm font-semibold bg-pulse text-white px-3 py-2 hover:bg-medical-600 whitespace-nowrap">
             {{ t.navDemand }}
           </NuxtLink>
           <button
@@ -123,15 +126,16 @@ onBeforeUnmount(() => {
     <div v-show="menuOpen" class="lg:hidden border-t border-ink/10 bg-white px-4 py-2">
       <NuxtLink
         v-for="link in links"
-        :key="link.id"
-        :to="`/#${link.id}`"
+        :key="link.to"
+        :to="link.to"
         class="block py-3 text-base border-b border-ink/10"
+        :class="route.path === link.to ? 'text-pulse font-semibold' : ''"
         @click="closeMenu"
       >
         {{ link.label }}
       </NuxtLink>
       <a href="tel:+352621387104" class="block py-3 font-semibold whitespace-nowrap">+352 621 387 104</a>
-      <NuxtLink to="/#guide" class="block text-center bg-pulse text-white font-semibold py-3 mt-2 mb-3" @click="closeMenu">
+      <NuxtLink to="/organiser" class="block text-center bg-pulse text-white font-semibold py-3 mt-2 mb-3" @click="closeMenu">
         {{ t.mobileCta }}
       </NuxtLink>
     </div>

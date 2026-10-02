@@ -95,8 +95,6 @@ onBeforeUnmount(() => {
           </article>
         </Reveal>
       </div>
-
-      <p class="mt-8 text-sm text-ink/50">{{ t.servicesImageNote }}</p>
     </div>
   </section>
 </template>

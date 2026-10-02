@@ -23,10 +23,10 @@ const hrefs = [
           {{ t.heroLead }}
         </p>
         <p class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <NuxtLink to="/#guide" class="bg-pulse hover:bg-medical-600 text-white font-semibold px-5 py-3">
+          <NuxtLink to="/organiser" class="bg-pulse hover:bg-medical-600 text-white font-semibold px-5 py-3">
             {{ t.heroCta1 }}
           </NuxtLink>
-          <NuxtLink to="/#volunteer" class="font-semibold text-pulse hover:underline">
+          <NuxtLink to="/benevoles" class="font-semibold text-pulse hover:underline">
             {{ t.heroCta2 }}
           </NuxtLink>
         </p>
