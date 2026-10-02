@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.P.S.T.L. - Bénévoles Premiers Secours Team Luxembourg</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#0066FF',
+                            600: '#0052cc',
+                            700: '#003d99',
+                        },
+                        emeraldbrand: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                        },
+                        redalert: '#ef4444'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .hero-pharma-bg {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 50%, #e0effe 100%);
+        }
+        
+        .badge-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-medical-500 selection:text-white">
+
+    <div class="bg-medical-500 text-white text-xs sm:text-sm py-2 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-3 text-center md:text-left">
+                <span class="bg-red-500 text-white text-[10px] font-black uppercase px-2 py-0.5 rounded-full badge-pulse"><i class="fa-solid fa-headset mr-1"></i> Urgence A.S.B.L.</span>
+                <span id="topBarAnnouncement" class="font-medium text-sky-100">Besoin de secouristes bénévoles pour votre événement à Luxembourg ? Contactez-nous !</span>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="tel:+352621387104" class="hover:text-emerald-300 font-bold flex items-center transition">
+                    <i class="fa-solid fa-phone-volume text-emerald-300 mr-1.5 animate-bounce"></i>
+                    <span>+352 621 387 104</span>
+                </a>
+                
+                <!-- Language Selector -->
+                <div class="flex items-center space-x-1 border-l border-white/20 pl-4">
+                    <i class="fa-solid fa-globe text-sky-200 text-xs"></i>
+                    <select id="langSwitch" onchange="switchLanguage(this.value)" class="bg-transparent text-white font-bold text-xs focus:outline-none cursor-pointer">
+                        <option value="fr" class="text-slate-900">FR</option>
+                        <option value="de" class="text-slate-900">DE</option>
+                        <option value="en" class="text-slate-900">EN</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center space-x-3 shrink-0">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-medical-600 to-sky-400 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-medical-500/25 border-2 border-white">
+                        <i class="fa-solid fa-heart-circle-bold text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-tight text-slate-900 block leading-none">B.P.S.T.L.</span>
+                        <span class="text-[10px] font-bold tracking-widest uppercase text-medical-600 block mt-1">Premiers Secours Luxembourg</span>
+                    </div>
+                </a>
+
+                <!-- Middle Search Bar (Pharmaxis Style) -->
+                <div class="hidden lg:flex items-center flex-1 max-w-lg mx-6">
+                    <div class="relative w-full">
+                        <input type="text" id="searchInput" placeholder="Rechercher une prestation, poste de secours, DAE, formation..." class="w-full bg-slate-100 text-xs font-medium pl-4 pr-12 py-3 rounded-full border border-slate-200 focus:outline-none focus:border-medical-500 focus:bg-white transition-all">
+                        <button onclick="handleSearch()" class="absolute right-1 top-1/2 -translate-y-1/2 bg-medical-500 hover:bg-medical-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition shadow-sm">
+                            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Quick User / CTA Actions -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="openModal('accountModal')" class="text-xs font-bold text-slate-700 hover:text-medical-600 px-3 py-2 flex items-center transition">
+                        <i class="fa-regular fa-circle-user text-base mr-1.5 text-medical-500"></i>
+                        <span id="navAccount">Espace Membre</span>
+                    </button>
+                    <a href="#calculator" class="bg-medical-500 hover:bg-medical-600 text-white text-xs font-extrabold px-5 py-3 rounded-full shadow-md hover:shadow-lg transition flex items-center">
+                        <i class="fa-solid fa-shield-heart mr-2 text-sm"></i>
+                        <span id="navDemand">Demander un Poste</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Categories Navigation Bar -->
+            <nav class="hidden md:flex items-center space-x-8 py-3 border-t border-slate-100 text-xs font-extrabold uppercase tracking-wider text-slate-600">
+                <a href="#hero" class="text-medical-600 border-b-2 border-medical-500 pb-1" id="navHome">Accueil</a>
+                <a href="#about" class="hover:text-medical-500 transition" id="navAbout">À Propos</a>
+                <a href="#services" class="hover:text-medical-500 transition" id="navServices">Nos Services</a>
+                <a href="#calculator" class="hover:text-medical-500 transition" id="navDevis">Devis Poste de Secours</a>
+                <a href="#volunteer" class="hover:text-medical-500 transition" id="navJoin">Devenir Bénévole</a>
+                <a href="#contact" class="hover:text-medical-500 transition" id="navContact">Contact & Accès</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold border-b border-slate-100">Accueil</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold border-b border-slate-100">À Propos</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold border-b border-slate-100">Nos Services</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold border-b border-slate-100">Demander un Poste</a>
+            <a href="#volunteer" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold border-b border-slate-100">Devenir Bénévole</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-800 font-bold">Contact</a>
+            <div class="pt-2">
+                <a href="#calculator" onclick="toggleMobileMenu()" class="block text-center bg-medical-500 text-white font-bold py-3 rounded-xl shadow">Demander un Dispositif</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-pharma-bg relative py-12 md:py-20 border-b border-slate-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Hero Left Content -->
+                <div class="lg:col-span-6 space-y-6 text-center lg:text-left z-10">
+                    <div class="inline-flex items-center space-x-2 bg-white/90 backdrop-blur border border-sky-200 px-3.5 py-1.5 rounded-full shadow-sm text-xs font-bold text-medical-600">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span id="heroTagline">A.S.B.L. Agréée • Agence du Bénévolat Luxembourg</span>
+                    </div>
+
+                    <h1 id="heroHeadline" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                        Présence Médicale & Premier Secours sur Vos Événements
+                    </h1>
+
+                    <!-- Citation standard from benevolat.lu -->
+                    <div class="bg-white/60 backdrop-blur-sm border-l-4 border-medical-500 p-4 rounded-r-xl shadow-sm text-left">
+                        <p id="heroMotto" class="text-slate-700 text-sm sm:text-base font-semibold italic">
+                            « Unser Verein leistet ehrenamtlich Erste Hilfe auf Veranstaltungen aller Art und sind im Notfall für die Menschen da um zu helfen. »
+                        </p>
+                        <p class="text-[11px] font-bold text-slate-500 mt-1 uppercase tracking-wider">— B.P.S.T.L. Echternach</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#calculator" class="w-full sm:w-auto bg-medical-500 hover:bg-medical-600 text-white font-extrabold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center">
+                            <i class="fa-solid fa-file-signature mr-2"></i>
+                            <span id="heroCta1">Demander un Poste de Secours</span>
+                        </a>
+                        <a href="#volunteer" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-extrabold px-8 py-4 rounded-full shadow-sm hover:shadow transition text-center flex items-center justify-center">
+                            <i class="fa-solid fa-hand-holding-heart text-red-500 mr-2"></i>
+                            <span id="heroCta2">Devenir Bénévole</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Right Content: 3D First-Aid Asset Visual (Matching Reference Style) -->
+                <div class="lg:col-span-6 relative flex justify-center items-center">
+                    <div class="relative w-full max-w-md lg:max-w-none">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-medical-500 to-emerald-400 rounded-3xl blur-2xl opacity-20 animate-pulse"></div>
+                        
+                        <div class="relative bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-white">
+                            <!-- Medical Bag / DAE Visual Card -->
+                            <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-gradient-to-tr from-sky-900 to-slate-800 flex items-center justify-center">
+                                <img id="heroVisualImg" src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="Matériel Secourisme" class="w-full h-full object-cover opacity-90 hover:scale-105 transition duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+                                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-extrabold text-slate-800 shadow">
+                                    <i class="fa-solid fa-kit-medical text-red-500 mr-1"></i> Équipement Pro DAE
+                                </div>
+
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <div class="bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/20 flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center text-white font-bold">
+                                                <i class="fa-solid fa-truck-medical text-lg"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-bold text-sm">Poste de Premier Secours</div>
+                                                <div class="text-xs text-sky-200">Interventions Manifestations Luxembourg</div>
+                                            </div>
+                                        </div>
+                                        <span class="bg-emerald-500 text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase">A.S.B.L.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-white py-6 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-[11px] font-black uppercase tracking-widest text-slate-400 mb-4">Réseaux Institutionnels & Partenaires Officiels</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-center opacity-80">
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-hand-holding-heart text-2xl text-medical-500 mr-2"></i>
+                    <span class="text-xs">Agence Bénévolat</span>
+                </div>
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-building-columns text-2xl text-slate-700 mr-2"></i>
+                    <span class="text-xs">Ville d'Echternach</span>
+                </div>
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-heart-circle-bolt text-2xl text-red-500 mr-2"></i>
+                    <span class="text-xs">Réseau DAE Lux</span>
+                </div>
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-user-shield text-2xl text-emerald-500 mr-2"></i>
+                    <span class="text-xs">First Responders</span>
+                </div>
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-people-group text-2xl text-amber-500 mr-2"></i>
+                    <span class="text-xs">Secours Luxembourg</span>
+                </div>
+                <div class="flex items-center justify-center p-2 font-bold text-slate-700 hover:text-medical-600 transition">
+                    <i class="fa-solid fa-notes-medical text-2xl text-sky-500 mr-2"></i>
+                    <span class="text-xs">Sécurité Civile</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left 3-Image Overlapping Curved Grid (Pharmaxis exact layout) -->
+                <div class="lg:col-span-6">
+                    <div class="grid grid-cols-2 gap-4 relative">
+                        <!-- Big Image 1 -->
+                        <div class="space-y-4">
+                            <div class="rounded-3xl overflow-hidden shadow-xl h-56 sm:h-64 border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Formation Premier Secours" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                            </div>
+                            <!-- Counter Badge Card -->
+                            <div class="bg-medical-500 text-white rounded-3xl p-6 shadow-xl text-center border-2 border-white">
+                                <div class="text-3xl sm:text-4xl font-black tracking-tight">100%+</div>
+                                <div class="text-xs font-bold text-sky-100 uppercase tracking-wider mt-1" id="statBadge">Volontaires Dévoués</div>
+                            </div>
+                        </div>
+
+                        <!-- Image 2 & 3 -->
+                        <div class="space-y-4 pt-8">
+                            <div class="rounded-3xl overflow-hidden shadow-xl h-44 sm:h-52 border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80" alt="Soins d'urgence" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="rounded-3xl overflow-hidden shadow-xl h-44 sm:h-52 border-2 border-white">
+                                <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80" alt="Matériel Médical DAE" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Text Content -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div>
+                        <span class="text-xs font-extrabold text-medical-600 uppercase tracking-widest bg-medical-50 px-3.5 py-1.5 rounded-full border border-medical-100">Notre Engagement</span>
+                        <h2 id="aboutTitle" class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 leading-tight">
+                            Engagement & Dévouement pour la Sécurité au Luxembourg
+                        </h2>
+                    </div>
+
+                    <p id="aboutDesc1" class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        L'association <strong>Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L. a.s.b.l.)</strong> rassemble des secouristes engagés pour apporter une assistance médicale rapide lors d'événements culturels, sportifs et récréatifs.
+                    </p>
+
+                    <!-- Key Pillars Checklist -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900">Poste Prévisionnel</h4>
+                                <p class="text-xs text-slate-500">Dispositifs de secours adaptés</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900">Équipe Multilingue</h4>
+                                <p class="text-xs text-slate-500">Secouristes FR / DE / LU / EN</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900">Matériel DAE Pro</h4>
+                                <p class="text-xs text-slate-500">Défibrillateurs & sacs réanimation</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900">Intervention Immédiate</h4>
+                                <p class="text-xs text-slate-500">Prise en charge avant secours public</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="#services" class="inline-flex items-center bg-medical-500 hover:bg-medical-600 text-white font-extrabold px-7 py-3.5 rounded-full shadow transition">
+                            <span>Découvrir nos services</span>
+                            <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <span class="text-xs font-extrabold text-medical-600 uppercase tracking-widest bg-medical-50 px-3.5 py-1 rounded-full border border-medical-100">Nos Prestations</span>
+            <h2 id="servicesTitle" class="text-3xl font-black text-slate-900 mt-2 mb-10">Découvrez Nos Services de Secours Événementiel</h2>
+
+            <!-- 6 Circle Category Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                
+                <!-- Category 1 -->
+                <div onclick="selectCategory('Postes de Secours')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-sky-100 text-sky-600 group-hover:bg-medical-500 group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-house-medical"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Postes de Secours</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Concerts & Festivals</span>
+                </div>
+
+                <!-- Category 2 -->
+                <div onclick="selectCategory('Défibrillateur DAE')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-rose-100 text-rose-500 group-hover:bg-redalert group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-heart-circle-bolt"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Défibrillateurs DAE</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Unités Mobiles</span>
+                </div>
+
+                <!-- Category 3 -->
+                <div onclick="selectCategory('Tentes de Soins')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-emerald-100 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-tent"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Tentes de Soins</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Espaces Médicalisés</span>
+                </div>
+
+                <!-- Category 4 -->
+                <div onclick="selectCategory('Matériel d Urgent')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-amber-100 text-amber-600 group-hover:bg-amber-500 group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Matériel d'Urgence</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Sacs de Réanimation</span>
+                </div>
+
+                <!-- Category 5 -->
+                <div onclick="selectCategory('Équipe Pédestre')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-person-walking-with-cane"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Équipe Pédestre</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Patrouilles de Terrain</span>
+                </div>
+
+                <!-- Category 6 -->
+                <div onclick="selectCategory('Formation')" class="group cursor-pointer flex flex-col items-center p-4 rounded-3xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                    <div class="w-24 h-24 rounded-full bg-teal-100 text-teal-600 group-hover:bg-teal-600 group-hover:text-white flex items-center justify-center text-3xl shadow-md transition-all duration-300 transform group-hover:scale-110 mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-800 group-hover:text-medical-600">Formations Interne</h3>
+                    <span class="text-[11px] text-slate-400 mt-1">Recyclage Continue</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="py-16 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl border border-slate-200">
+                
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="bg-red-100 text-red-600 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider">Demande Rapide de Poste</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">Calculateur de Dispositif de Secours (DPS)</h2>
+                    <p class="text-slate-600 mt-2 text-xs sm:text-sm">Organisateurs d'événements au Luxembourg, estimez instantanément vos besoins en secouristes et matériel.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Calculator Inputs -->
+                    <div class="lg:col-span-7 space-y-6 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-700 mb-2"><i class="fa-solid fa-calendar-star text-medical-500 mr-2"></i>Type de Manifestation</label>
+                            <select id="eventType" onchange="calculateNeeds()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs font-bold focus:outline-none focus:border-medical-500">
+                                <option value="sports">Événement Sportif (Trail, Cyclisme, Marathon)</option>
+                                <option value="concert">Concert / Festival Culturel</option>
+                                <option value="local">Fête Rationale / Brocante / Fête de Village</option>
+                                <option value="gala">Soirée Privée / Gala d'Entreprise</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-xs font-extrabold uppercase text-slate-700"><i class="fa-solid fa-users text-medical-500 mr-2"></i>Public & Participants Estimaés</label>
+                                <span id="visitorVal" class="text-sm font-black text-medical-600">600 Personnes</span>
+                            </div>
+                            <input type="range" id="visitorRange" min="100" max="8000" step="100" value="600" oninput="calculateNeeds()" class="w-full accent-medical-500 h-2 bg-slate-200 rounded-lg cursor-pointer">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-700 mb-2"><i class="fa-solid fa-clock text-medical-500 mr-2"></i>Durée (Heures)</label>
+                                <input type="number" id="eventHours" value="8" min="1" max="72" onchange="calculateNeeds()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-extrabold uppercase text-slate-700 mb-2"><i class="fa-solid fa-map-pin text-medical-500 mr-2"></i>Canton / Commune</label>
+                                <input type="text" id="eventLoc" placeholder="Ex: Echternach, Mersch..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase text-slate-700 mb-2"><i class="fa-solid fa-sliders text-medical-500 mr-2"></i>Matériel Requis</label>
+                            <div class="grid grid-cols-2 gap-3 text-xs">
+                                <label class="flex items-center p-3 bg-white rounded-xl border border-slate-200 cursor-pointer font-bold">
+                                    <input type="checkbox" id="optDae" checked onchange="calculateNeeds()" class="accent-medical-500 rounded mr-2">
+                                    Défibrillateur DAE
+                                </label>
+                                <label class="flex items-center p-3 bg-white rounded-xl border border-slate-200 cursor-pointer font-bold">
+                                    <input type="checkbox" id="optTent" onchange="calculateNeeds()" class="accent-medical-500 rounded mr-2">
+                                    Tente Post-Secours
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Calculator Output -->
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl relative overflow-hidden border border-slate-800">
+                        <div>
+                            <h3 class="text-lg font-black mb-4 flex items-center text-emerald-400">
+                                <i class="fa-solid fa-calculator mr-2"></i> Recommandation Officielle
+                            </h3>
+
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-white/10 backdrop-blur p-4 rounded-xl border border-white/10 flex justify-between items-center">
+                                    <span class="text-xs text-slate-300 font-medium">Secouristes Recommandés:</span>
+                                    <span id="resResponders" class="text-xl font-black text-emerald-400">3 Secouristes</span>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur p-4 rounded-xl border border-white/10 flex justify-between items-center">
+                                    <span class="text-xs text-slate-300 font-medium">Matériel Médical:</span>
+                                    <span id="resEquip" class="text-xs font-bold text-sky-300">1 Sac Urgence + 1 DAE</span>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur p-4 rounded-xl border border-white/10 flex justify-between items-center">
+                                    <span class="text-xs text-slate-300 font-medium">Type de DPS:</span>
+                                    <span id="resCategory" class="text-xs font-bold text-amber-300">Dispositif Petite Envergure</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button onclick="submitDPSQuote()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center text-xs tracking-wider uppercase">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> Transmettre la demande d'intervention
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="volunteer" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-medical-600 via-sky-600 to-medical-700 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="lg:col-span-8 space-y-4">
+                        <span class="bg-white/20 backdrop-blur text-white text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider">Rejoignez l'Équipe B.P.S.T.L.</span>
+                        <h2 class="text-3xl sm:text-4xl font-black tracking-tight">Devenez Secouriste Bénévole au Luxembourg</h2>
+                        <p class="text-sky-100 text-xs sm:text-sm leading-relaxed max-w-2xl">
+                            Vous résidez au Luxembourg et souhaitez apprendre les gestes qui sauvent tout en participant aux grands événements de la région ? Nous assurons votre formation et vos équipements !
+                        </p>
+                    </div>
+                    <div class="lg:col-span-4 text-center lg:text-right">
+                        <button onclick="openModal('volunteerModal')" class="bg-white hover:bg-slate-100 text-medical-600 font-black px-8 py-4 rounded-full shadow-lg transition transform hover:scale-105 inline-flex items-center text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-user-plus mr-2"></i> Postuler Comme Bénévole
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-medical-500 rounded-xl flex items-center justify-center text-white font-extrabold text-lg">
+                            <i class="fa-solid fa-heart-circle-bold"></i>
+                        </div>
+                        <span class="text-xl font-black text-white tracking-tight">B.P.S.T.L. a.s.b.l.</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-slate-400">
+                        Bénévoles Premiers Secours Team Luxembourg — Association à but non lucratif enregistrée sur le portail de l'Agence du Bénévolat Luxembourg.
+                    </p>
+                </div>
+
+                <!-- Col 2 -->
+                <div>
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4">Navigation Rapide</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#hero" class="hover:text-white transition">Accueil</a></li>
+                        <li><a href="#about" class="hover:text-white transition">À Propos</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Nos Prestations</a></li>
+                        <li><a href="#calculator" class="hover:text-white transition">Calculateur DPS</a></li>
+                        <li><a href="#volunteer" class="hover:text-white transition">Devenir Bénévole</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4">Informations Légales</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><strong>Statut:</strong> a.s.b.l. Luxembourg</li>
+                        <li><strong>Registre:</strong> Agence du Bénévolat</li>
+                        <li><strong>Siège:</strong> Echternach, Luxembourg</li>
+                        <li><a href="#" onclick="showToast('Mentions Légales à jour')" class="hover:underline">Mentions Légales & RGPD</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4">Contact & Permanence</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-medical-500 mt-0.5"></i>
+                            <span>8 Rue des Romains, 6478 Echternach, Luxembourg</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-emerald-400"></i>
+                            <a href="tel:+352621387104" class="hover:text-white font-bold">+352 621 387 104</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-globe text-sky-400"></i>
+                            <span>benevolat.lu / bpstl</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+                <p>&copy; 2026 Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L. a.s.b.l.). Tous droits réservés.</p>
+                <p class="mt-2 sm:mt-0">Plateforme Officielle Secours Luxembourg</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal: Volunteer Application -->
+    <div id="volunteerModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('volunteerModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+                    <i class="fa-solid fa-hand-holding-medical"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">Postuler comme Bénévole</h3>
+                <p class="text-xs text-slate-500 mt-1">Rejoignez nos secouristes sur le terrain au Luxembourg</p>
+            </div>
+            <form onsubmit="handleModalForm(event, 'Candidature enregistrée avec succès !')" class="space-y-4">
+                <input type="text" placeholder="Nom & Prénom" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                <input type="email" placeholder="E-mail (@lu / @com)" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                <input type="tel" placeholder="Téléphone (+352 ...)" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3 rounded-xl shadow text-xs uppercase tracking-wider">Envoyer ma demande</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Member Account Login -->
+    <div id="accountModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal('accountModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-medical-100 text-medical-600 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">Espace Membre B.P.S.T.L.</h3>
+                <p class="text-xs text-slate-500 mt-1">Accès réservé aux secouristes enregistrés</p>
+            </div>
+            <form onsubmit="handleModalForm(event, 'Bienvenue dans votre Espace Membre B.P.S.T.L. !')" class="space-y-4">
+                <input type="email" placeholder="Identifiant secouriste" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                <input type="password" placeholder="Mot de passe" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:outline-none focus:border-medical-500">
+                <button type="submit" class="w-full bg-medical-500 hover:bg-medical-600 text-white font-extrabold py-3 rounded-xl shadow text-xs uppercase tracking-wider">Se Connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl z-50 transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 border border-slate-700">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg" class="text-xs font-bold">Action réalisée avec succès!</span>
+    </div>
+
+    <script>
+        // Multilingual Translation Dictionary
+        const i18n = {
+            fr: {
+                topAnnounce: "Besoin de secouristes bénévoles pour votre événement à Luxembourg ? Contactez-nous !",
+                navAccount: "Espace Membre",
+                navDemand: "Demander un Poste",
+                navHome: "Accueil",
+                navAbout: "À Propos",
+                navServices: "Nos Services",
+                navDevis: "Devis Poste de Secours",
+                navJoin: "Devenir Bénévole",
+                navContact: "Contact & Accès",
+                heroTag: "A.S.B.L. Agréée • Agence du Bénévolat Luxembourg",
+                heroTitle: "Présence Médicale & Premier Secours sur Vos Événements",
+                heroMotto: "« Unser Verein leistet ehrenamtlich Erste Hilfe auf Veranstaltungen aller Art und sind im Notfall für die Menschen da um zu helfen. »",
+                heroCta1: "Demander un Poste de Secours",
+                heroCta2: "Devenir Bénévole",
+                aboutTitle: "Engagement & Dévouement pour la Sécurité au Luxembourg",
+                aboutDesc: "L'association Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L. a.s.b.l.) rassemble des secouristes engagés pour apporter une assistance médicale rapide lors d'événements culturels, sportifs et récréatifs.",
+                servicesTitle: "Découvrez Nos Services de Secours Événementiel",
+                statBadge: "Volontaires Dévoués"
+            },
+            de: {
+                topAnnounce: "Brauchen Sie ehrenamtliche Ersthelfer für Ihre Veranstaltung in Luxemburg? Kontaktieren Sie uns!",
+                navAccount: "Mitgliederbereich",
+                navDemand: "Sanitätsdienst anfordern",
+                navHome: "Startseite",
+                navAbout: "Über uns",
+                navServices: "Unsere Dienste",
+                navDevis: "Angebot Sanitätsdienst",
+                navJoin: "Ehrenamtlich mithelfen",
+                navContact: "Kontakt",
+                heroTag: "A.S.B.L. Annerkannt • Agence du Bénévolat Luxemburg",
+                heroTitle: "Medizinische Präsenz & Erste Hilfe auf Ihren Events",
+                heroMotto: "« Unser Verein leistet ehrenamtlich Erste Hilfe auf Veranstaltungen aller Art und sind im Notfall für die Menschen da um zu helfen. »",
+                heroCta1: "Sanitätsdienst Anfordern",
+                heroCta2: "Ersthelfer Werden",
+                aboutTitle: "Engagement & Sicherheit für Luxemburg",
+                aboutDesc: "Der Verein Bénévoles Premiers Secours Team Luxemburg (B.P.S.T.L. a.s.b.l.) vereint engagierte Ersthelfer für schnelle medizinische Hilfe bei Kultur-, Sport- und Freizeitveranstaltungen.",
+                servicesTitle: "Unsere Sanitätsdienste im Überblick",
+                statBadge: "Ehrenamtliche Ersthelfer"
+            },
+            en: {
+                topAnnounce: "Need volunteer first-aiders for your event in Luxembourg? Contact us!",
+                navAccount: "Member Portal",
+                navDemand: "Request First Aid Post",
+                navHome: "Home",
+                navAbout: "About Us",
+                navServices: "Our Services",
+                navDevis: "First Aid Quote",
+                navJoin: "Become a Volunteer",
+                navContact: "Contact Us",
+                heroTag: "Registered NPO • Agence du Bénévolat Luxembourg",
+                heroTitle: "Medical Presence & First Aid Coverage for Events",
+                heroMotto: "« Our association provides voluntary first aid at events of all kinds and is there to help people in emergencies. »",
+                heroCta1: "Request First Aid Post",
+                heroCta2: "Become a Volunteer",
+                aboutTitle: "Commitment & Safety Across Luxembourg",
+                aboutDesc: "Bénévoles Premiers Secours Team Luxembourg (B.P.S.T.L. a.s.b.l.) brings together dedicated first-responders to ensure rapid emergency assistance during events.",
+                servicesTitle: "Explore Our Event Safety Services",
+                statBadge: "Dedicated Volunteers"
+            }
+        };
+
+        function switchLanguage(lang) {
+            const data = i18n[lang] || i18n.fr;
+            document.getElementById('topBarAnnouncement').textContent = data.topAnnounce;
+            document.getElementById('navAccount').textContent = data.navAccount;
+            document.getElementById('navDemand').textContent = data.navDemand;
+            document.getElementById('navHome').textContent = data.navHome;
+            document.getElementById('navAbout').textContent = data.navAbout;
+            document.getElementById('navServices').textContent = data.navServices;
+            document.getElementById('navDevis').textContent = data.navDevis;
+            document.getElementById('navJoin').textContent = data.navJoin;
+            document.getElementById('navContact').textContent = data.navContact;
+            document.getElementById('heroTagline').textContent = data.heroTag;
+            document.getElementById('heroHeadline').textContent = data.heroTitle;
+            document.getElementById('heroMotto').textContent = data.heroMotto;
+            document.getElementById('heroCta1').textContent = data.heroCta1;
+            document.getElementById('heroCta2').textContent = data.heroCta2;
+            document.getElementById('aboutTitle').textContent = data.aboutTitle;
+            document.getElementById('aboutDesc1').textContent = data.aboutDesc;
+            document.getElementById('servicesTitle').textContent = data.servicesTitle;
+            document.getElementById('statBadge').textContent = data.statBadge;
+
+            showToast(`Langue sélectionnée: ${lang.toUpperCase()}`);
+        }
+
+        // DPS Needs Calculator
+        function calculateNeeds() {
+            const visitors = parseInt(document.getElementById('visitorRange').value);
+            const hours = parseInt(document.getElementById('eventHours').value);
+            const eventType = document.getElementById('eventType').value;
+            const hasTent = document.getElementById('optTent').checked;
+
+            document.getElementById('visitorVal').textContent = `${visitors} Personnes`;
+
+            let responders = 2;
+            let category = "DPS Petite Envergure";
+            let equip = "1 Sac Urgence + 1 DAE";
+
+            if (visitors > 1200 || eventType === 'sports') {
+                responders = Math.max(4, Math.ceil(visitors / 350));
+                category = "DPS Moyenne Envergure";
+                equip = "2 Sacs Urgence + 2 DAE";
+            }
+            if (visitors > 3000) {
+                responders = Math.max(8, Math.ceil(visitors / 250));
+                category = "DPS Grande Envergure";
+                equip = "2 Postes Fixes + 3 DAE";
+            }
+
+            if (hasTent) {
+                equip += " + Tente Soins";
+            }
+
+            document.getElementById('resResponders').textContent = `${responders} Secouristes`;
+            document.getElementById('resEquip').textContent = equip;
+            document.getElementById('resCategory').textContent = category;
+        }
+
+        function submitDPSQuote() {
+            showToast("Votre demande de poste a été transmise à l'équipe B.P.S.T.L. !");
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            if(query.trim()) {
+                showToast(`Recherche B.P.S.T.L.: "${query}"`);
+            }
+        }
+
+        function selectCategory(cat) {
+            showToast(`Filtre activé : ${cat}`);
+            document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        function handleModalForm(e, msg) {
+            e.preventDefault();
+            const modal = e.target.closest('.fixed');
+            if(modal) modal.classList.add('hidden');
+            showToast(msg);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Init
+        calculateNeeds();
+    </script>
+</body>
+</html>
